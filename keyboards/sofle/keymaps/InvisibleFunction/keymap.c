@@ -4,9 +4,8 @@ enum sofle_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
     _QWERTY,
     _COLEMAK,
-    _LOWER,
-    _RAISE,
-    _ADJUST,
+    _SYM,
+    _MOVE,
 };
 
 enum custom_keycodes {
@@ -45,19 +44,15 @@ static void print_status_narrow(void) {
     // Print current mode
     oled_write_P(PSTR("\n\n"), false);
     oled_write_ln_P(PSTR("MODE"), false);
+    oled_write_ln_P(PSTR("MAC"), false);
     oled_write_ln_P(PSTR(""), false);
-    if (keymap_config.swap_lctl_lgui) {
-        oled_write_ln_P(PSTR("MAC"), false);
-    } else {
-        oled_write_ln_P(PSTR("WIN"), false);
-    }
 
     switch (get_highest_layer(default_layer_state)) {
         case _QWERTY:
-            oled_write_ln_P(PSTR("Qwrt"), false);
+            oled_write_ln_P(PSTR("Qwert"), false);
             break;
         case _COLEMAK:
-            oled_write_ln_P(PSTR("Clmk"), false);
+            oled_write_ln_P(PSTR("Colmk"), false);
             break;
         default:
             oled_write_P(PSTR("Undef"), false);
@@ -71,17 +66,15 @@ static void print_status_narrow(void) {
             oled_write_P(PSTR("Base\n"), false);
             break;
         case _SYM:
-            oled_write_P(PSTR("Symbol"), false);
+            oled_write_P(PSTR("Symbo\n"), false);
             break;
         case _MOVE:
-            oled_write_P(PSTR("Move"), false);
+            oled_write_P(PSTR("Move\n"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
     oled_write_P(PSTR("\n\n"), false);
-    led_t led_usb_state = host_keyboard_led_state();
-    oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -113,7 +106,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_persistent_default_layer(_COLEMAK);
             }
             return false;
-        case KC_LOWER:
+        /*case KC_LOWER:
             if (record->event.pressed) {
                 layer_on(_LOWER);
                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
@@ -137,7 +130,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 layer_off(_ADJUST);
             }
-            return false;
+            return false;*/
         case KC_PRVWD:
             if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {
