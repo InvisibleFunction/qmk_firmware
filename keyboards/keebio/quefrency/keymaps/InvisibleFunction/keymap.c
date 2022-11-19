@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * The clockwise parameter tells you the direction of the encoder. It'll be
  * true when you turned the encoder clockwise, and false otherwise.
  */
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
   /* With an if statement we can check which encoder was turned. */
   if (index == 0) { /* First encoder */
     /* And with another if statement we can check the direction. */
@@ -32,4 +32,5 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   /* You can copy the code and change the index for every encoder you have. Most
      keyboards will only have two, so this piece of code will suffice. */
   }
+  return false;
 }
