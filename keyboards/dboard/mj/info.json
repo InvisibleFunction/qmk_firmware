@@ -1,0 +1,20 @@
+{
+  "keyboard_name": "mj",
+  "manufacturer": "dboard",
+  "url": "",
+  "maintainer": "dboard",
+  "usb": {
+      "vid": "0xFEED",
+      "pid": "0x0001",
+      "device_version": "0.0.1"
+    },
+  "processor": "atmega32u4",
+  "bootloader": "caterina",
+  "layouts": {
+    "LAYOUT_ortho_1x1": {
+      "layout": [
+        {"matrix": [0, 0], "x": 0, "y": 0}
+      ]
+    }
+  }
+}
