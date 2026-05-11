@@ -1,7 +1,6 @@
 // keymap.c for DBoard MJ
 
 #include QMK_KEYBOARD_H
-#include "quantum.h"
 #include <stdlib.h>
 
 // Define a reasonable range for the random intervals (in milliseconds)
@@ -36,7 +35,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         anti_sleep_enabled = false;
         // If shift is currently pressed when disabling, release it
         if (shift_pressed) {
-            unregister_code(KC_LSHIFT);
+            unregister_code(KC_LSFT);
             shift_pressed = false;
         }
     }
@@ -55,14 +54,14 @@ void matrix_scan_user(void) {
 
     // If it's time to press shift and shift is not already pressed
     if (current_time >= next_shift_press && !shift_pressed) {
-        register_code(KC_LSHIFT);
+        register_code(KC_LSFT);
         shift_pressed = true;
         shift_duration = 100 + (rand() % 200); // Hold shift for 100-300ms
     }
 
     // If shift is currently pressed and it's time to release it
     if (shift_pressed && (current_time - next_shift_press >= shift_duration)) {
-        unregister_code(KC_LSHIFT);
+        unregister_code(KC_LSFT);
         shift_pressed = false;
 
         // Set next press time to a random interval in the future
