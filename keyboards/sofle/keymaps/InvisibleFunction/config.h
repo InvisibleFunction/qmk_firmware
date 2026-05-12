@@ -1,6 +1,6 @@
 #pragma once
 
-#define MASTER_RIGHT
+#define MASTER_LEFT
 
 #define OLED_FONT_H "lib/glcdfont_sofle.c"
 
